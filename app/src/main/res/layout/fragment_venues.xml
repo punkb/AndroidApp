@@ -1,0 +1,82 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.crowdsight.mobile.app.Venues"
+    android:background="#ff000000">
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageWembley"
+        android:layout_gravity="left|top"
+        android:src="@drawable/wembley"
+        android:background="@null" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wembley Stadium"
+        android:id="@+id/textView"
+        android:layout_gravity="left|top"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="10dp"
+        android:textColor="#ffffffff"
+        android:textStyle="bold|italic"
+        android:textSize="28dp"
+        android:typeface="sans" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wembley Park, London"
+        android:id="@+id/textView2"
+        android:layout_gravity="left|top"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="40dp"
+        android:textColor="#ffffffff"
+        android:textStyle="italic"
+        android:textSize="18dp"
+        android:typeface="sans" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="21 miles away"
+        android:id="@+id/textView3"
+        android:layout_gravity="left|top"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="60dp"
+        android:textColor="#ffffffff"
+        android:textStyle="italic"
+        android:textSize="18dp"
+        android:typeface="sans" />
+
+    <ImageButton
+        android:layout_width="190dp"
+        android:layout_height="228dp"
+        android:id="@+id/imageRight"
+        android:layout_gravity="right|bottom"
+        android:src="@drawable/stadium2"
+        android:background="@null"
+        />
+
+    <ImageButton
+        android:layout_width="190dp"
+        android:layout_height="228dp"
+        android:id="@+id/imageLeft"
+        android:layout_gravity="left|bottom"
+        android:src="@drawable/stadium1"
+        android:background="@null"
+        />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imagebanner"
+        android:layout_gravity="left|center_vertical"
+        android:src="@drawable/banner"
+        android:background="@null"
+        android:layout_marginBottom="5dp" />
+
+</FrameLayout>

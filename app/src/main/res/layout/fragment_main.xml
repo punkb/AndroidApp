@@ -1,0 +1,111 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context="com.crowdsight.mobile.app.MainActivity$PlaceholderFragment"
+    android:background="@drawable/background">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:src="@drawable/profile"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Mark Lancaster"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="25dp"
+        android:textColor="#ffffffff"
+        android:textStyle="bold"
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textSize="30dp"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Member Since 2014"
+        android:id="@+id/textView2"
+        android:textColor="#ffffffff"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:typeface="sans"
+        android:layout_below="@+id/textView"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignStart="@+id/textView" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView2"
+        android:src="@drawable/status"
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView3"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/imageView2" />
+
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Your Team"
+        android:id="@+id/textView3"
+        android:textColor="#ffffffff"
+        android:textStyle="bold"
+        android:textSize="40dp"
+        android:layout_alignTop="@+id/imageView4"
+        android:layout_alignRight="@+id/imageRewards"
+        android:layout_alignEnd="@+id/imageRewards"
+        android:layout_alignParentEnd="false"
+        android:layout_marginLeft="40dp"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView4"
+        android:src="@drawable/manchester"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/imageOffers"
+        android:layout_alignStart="@+id/imageOffers"
+        android:layout_marginBottom="25dp"
+        android:layout_marginLeft="15dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageRewards"
+        android:src="@drawable/rewards"
+        android:background="@null"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/imageView3" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageOffers"
+        android:src="@drawable/offers"
+        android:layout_alignTop="@+id/imageRewards"
+        android:layout_toRightOf="@+id/textView3"
+        android:layout_marginLeft="25dp"
+        android:background="@null" />
+
+</RelativeLayout>

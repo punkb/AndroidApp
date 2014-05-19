@@ -1,0 +1,111 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.crowdsight.mobile.app.events"
+    android:background="@drawable/background">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="UEFA Champions League"
+        android:id="@+id/textView"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginTop="10dp"
+        android:textColor="#ffffffff"
+        android:textStyle="bold|italic"
+        android:textSize="28dp"
+        android:typeface="sans" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageGame1"
+        android:layout_gravity="center_horizontal|top"
+        android:src="@drawable/uefafinal"
+        android:layout_marginTop="15dp"
+        android:background="@null"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="11/03/2015 09PM"
+        android:id="@+id/textView12"
+        android:layout_gravity="left|center_vertical"
+        android:textColor="#ffffffff"
+        android:textStyle="bold"
+        android:layout_marginBottom="40dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Following:"
+        android:id="@+id/textView14"
+        android:layout_gravity="center"
+        android:textColor="#ffffffff"
+        android:textStyle="bold"
+        android:layout_marginBottom="40dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3,500 users"
+        android:id="@+id/textView15"
+        android:layout_gravity="center"
+        android:textColor="#ffffffff"
+        android:layout_marginBottom="40dp"
+        android:layout_marginLeft="75dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageGame2"
+        android:layout_gravity="left|center_vertical"
+        android:src="@drawable/uefafinal"
+        android:layout_marginTop="100dp"
+        android:background="@null"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1,500 users"
+        android:id="@+id/textView20"
+        android:layout_gravity="center_horizontal|bottom"
+        android:textColor="#ffffffff"
+        android:layout_marginBottom="40dp"
+        android:layout_marginLeft="75dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Following:"
+        android:id="@+id/textView19"
+        android:layout_gravity="center_horizontal|bottom"
+        android:textColor="#ffffffff"
+        android:textStyle="bold"
+        android:layout_marginBottom="40dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="15/03/2015 09PM"
+        android:id="@+id/textView18"
+        android:layout_gravity="left|bottom"
+        android:textColor="#ffffffff"
+        android:textStyle="bold"
+        android:layout_marginBottom="40dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="UEFA Champions League"
+        android:id="@+id/textView17"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:textColor="#ffffffff"
+        android:textStyle="bold|italic"
+        android:textSize="28dp"
+        android:typeface="sans" />
+</FrameLayout>

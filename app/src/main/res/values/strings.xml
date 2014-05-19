@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Crowdsight</string>
+    <string name="title_section1">Venues</string>
+    <string name="title_section2">Profile</string>
+    <string name="title_section3">Logout</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Refresh</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_sign_in">Crowdsight</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_inside">inside</string>
+
+</resources>
