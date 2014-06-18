@@ -2,8 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.crowdsight.mobile.app.game"
-    android:background="#ff000000">
+    tools:context="com.crowdsight.mobile.app.photoofday">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -11,20 +10,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
-        android:layout_gravity="left|center_vertical"
-        android:src="@drawable/photoday" />
+        android:layout_gravity="left|top"
+        android:background="@drawable/photomosaic" />
 
     <ImageButton
-        android:layout_width="390dp"
-        android:layout_height="270dp"
-        android:id="@+id/imagePhotoDay"
+        android:layout_width="match_parent"
+        android:layout_height="464dp"
+        android:id="@+id/imageViewPhoto"
         android:layout_gravity="left|top"
         android:background="@null" />
 
     <ImageButton
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:id="@+id/imageTwitter"
-        android:layout_gravity="left|bottom"
+        android:layout_width="53dp"
+        android:layout_height="65dp"
+        android:id="@+id/imageCamera"
+        android:layout_gravity="center_horizontal|bottom"
         android:background="@null" />
+
 </FrameLayout>

@@ -23,7 +23,10 @@ import android.widget.Toast;
 public class inside extends ActionBarActivity implements ActionBar.OnNavigationListener,
         about.OnFragmentInteractionListener,
         events.OnFragmentInteractionListener,
-        game.OnFragmentInteractionListener
+        game.OnFragmentInteractionListener,
+        photoofday.OnFragmentInteractionListener,
+        photoview.OnFragmentInteractionListener,
+        winner.OnFragmentInteractionListener
 {
 
     /**
@@ -112,6 +115,12 @@ public class inside extends ActionBarActivity implements ActionBar.OnNavigationL
         if (id == R.id.action_settings) {
             Intent i = new Intent(inside.this, SettingsActivity.class);
             startActivity(i);
+            return true;
+        }
+        else if(id == R.id.action_example){
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, winner.newInstance("",""))
+                    .commit();
             return true;
         }
         return super.onOptionsItemSelected(item);

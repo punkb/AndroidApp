@@ -1,28 +1,25 @@
 package com.crowdsight.mobile.app;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.Toast;
+
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link events.OnFragmentInteractionListener} interface
+ * {@link winner.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link events#newInstance} factory method to
+ * Use the {@link winner#newInstance} factory method to
  * create an instance of this fragment.
  *
  */
-public class events extends Fragment implements View.OnClickListener, game.OnFragmentInteractionListener {
+public class winner extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -40,18 +37,18 @@ public class events extends Fragment implements View.OnClickListener, game.OnFra
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment events.
+     * @return A new instance of fragment winner.
      */
     // TODO: Rename and change types and number of parameters
-    public static events newInstance(String param1, String param2) {
-        events fragment = new events();
+    public static winner newInstance(String param1, String param2) {
+        winner fragment = new winner();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
-    public events() {
+    public winner() {
         // Required empty public constructor
     }
 
@@ -68,35 +65,7 @@ public class events extends Fragment implements View.OnClickListener, game.OnFra
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_events, container, false);
-
-        ImageButton imageGame1 = (ImageButton) view.findViewById(R.id.imageGame1);
-        imageGame1.setOnClickListener(this);
-
-        ImageButton imageGame2 = (ImageButton) view.findViewById(R.id.imageGame2);
-        imageGame2.setOnClickListener(this);
-
-        return view;
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch(v.getId()){
-            case R.id.imageGame1:
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, game.newInstance("param1", "param2"))
-                        .commit();
-                break;
-            case R.id.imageGame2:
-                Toast.makeText(v.getContext(), "Next game!", Toast.LENGTH_SHORT).show();
-                break;
-        }
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
+        return inflater.inflate(R.layout.fragment_winner, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

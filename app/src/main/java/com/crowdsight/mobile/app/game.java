@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 
@@ -19,7 +21,7 @@ import android.widget.Toast;
  * create an instance of this fragment.
  *
  */
-public class game extends Fragment {
+public class game extends Fragment implements View.OnClickListener, photoofday.OnFragmentInteractionListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -70,7 +72,28 @@ public class game extends Fragment {
         Toast.makeText(view.getContext(), "Checking your location", Toast.LENGTH_SHORT).show();
         Toast.makeText(view.getContext(), "You are at Wembley. Check photo of the day competion!", Toast.LENGTH_SHORT).show();
 
+        ImageButton imagePhotoDay = (ImageButton) view.findViewById(R.id.imagePhotoDay);
+        imagePhotoDay.setOnClickListener(this);
+
+        ImageButton imageTwitter = (ImageButton) view.findViewById(R.id.imageTwitter);
+        imageTwitter.setOnClickListener(this);
+
         return view;
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.imagePhotoDay:
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, photoofday.newInstance("param1", "param2"))
+                        .commit();
+                break;
+            case R.id.imageTwitter:
+                Toast.makeText(v.getContext(), "Not implemented!", Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -95,6 +118,11 @@ public class game extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 
     /**
