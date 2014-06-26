@@ -62,6 +62,7 @@ public class MainActivity extends ActionBarActivity
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
 
+
         switch (position) {
             case 0:
                 fragmentManager.beginTransaction()
@@ -79,7 +80,19 @@ public class MainActivity extends ActionBarActivity
                 finish();
                 Toast.makeText(MainActivity.this, "Logout ...", Toast.LENGTH_LONG).show();
                 break;
+            case 3:
+            try {
+
+                    Intent t = new Intent(MainActivity.this, TrackLocation.class);
+                    startActivity(t);
+                    break;
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
         }
+
     }
 
     public void onSectionAttached(int number) {
@@ -95,6 +108,10 @@ public class MainActivity extends ActionBarActivity
                 startActivity(i);
                 finish();
                 Toast.makeText(MainActivity.this, "Logout ...", Toast.LENGTH_LONG).show();
+                break;
+            case 4:
+                Intent t = new Intent(MainActivity.this, TrackLocation.class);
+                startActivity(t);
                 break;
         }
     }
