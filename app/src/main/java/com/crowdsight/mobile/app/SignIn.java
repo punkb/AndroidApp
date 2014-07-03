@@ -18,12 +18,35 @@ public class SignIn extends ActionBarActivity {
     ImageButton plusButton;
     ImageButton twitterButton;
 
+    private MainFragment mainFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
         addListenerButtons();
+
+        //Facebook Login Section I
+
+        if (savedInstanceState == null) {
+            // Add the fragment on initial activity setup
+            mainFragment = new MainFragment();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(android.R.id.content, mainFragment)
+                    .commit();
+        } else {
+            // Or set the fragment from restored state info
+            mainFragment = (MainFragment) getSupportFragmentManager()
+                    .findFragmentById(android.R.id.content);
+        }
+        //Facebook Login Section I Ends here
+
+        //This is intent to get in the app.
+//        Intent i = new Intent(SignIn.this, MainActivity.class);
+//        startActivity(i);
+//        finish();
     }
 
     @Override
@@ -58,35 +81,35 @@ public class SignIn extends ActionBarActivity {
             }
         });
 
-        facebookButton = (ImageButton) findViewById(R.id.imageButton3);
-        facebookButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                //TODO: call new account activity
-                Toast.makeText(SignIn.this, "Facebook services not available!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        plusButton = (ImageButton) findViewById(R.id.imageButton4);
-        plusButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                //TODO: call new account activity
-                Toast.makeText(SignIn.this, "Google+ services not available!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        twitterButton = (ImageButton) findViewById(R.id.imageButton5);
-        twitterButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                //TODO: call new account activity
-                Toast.makeText(SignIn.this, "Twitter services not available!", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        facebookButton = (ImageButton) findViewById(R.id.imageButton3);
+//        facebookButton.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View arg0) {
+//                //TODO: call new account activity
+//                Toast.makeText(SignIn.this, "Facebook services not available!", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//        plusButton = (ImageButton) findViewById(R.id.imageButton4);
+//        plusButton.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View arg0) {
+//                //TODO: call new account activity
+//                Toast.makeText(SignIn.this, "Google+ services not available!", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//        twitterButton = (ImageButton) findViewById(R.id.imageButton5);
+//        twitterButton.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View arg0) {
+//                //TODO: call new account activity
+//                Toast.makeText(SignIn.this, "Twitter services not available!", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
         loginButton = (ImageButton) findViewById(R.id.imageButton2);
         loginButton.setOnClickListener(new View.OnClickListener() {

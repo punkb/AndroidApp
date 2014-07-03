@@ -38,7 +38,7 @@ public class TrackLocation extends ActionBarActivity {
         LocationManager lm = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         LocationListener ll = new myLocationListener();
         //change NETWORK_PROVIDER to GPS_PROVIDER to compile and run on Emulator
-        // NETWORK_PROVIDER does not support Emulator. 
+        // NETWORK_PROVIDER does not support Emulator.
         lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, ll);
 
 

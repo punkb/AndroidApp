@@ -12,10 +12,13 @@
     <string name="title_activity_splash_screen">SplashScreen</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="title_activity_sign_in">Crowdsight</string>
+    <string name="title_activity_sign_in">Crowdsight1</string>
     <string name="hello_world">Hello world!</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_inside">inside</string>
     <string name="title_activity_track_location">TrackLocation</string>
+    <string name="app_id">253436634864563</string>
+
+    <string name="title_ActivityLogin">LoginActivity</string>
 
 </resources>
