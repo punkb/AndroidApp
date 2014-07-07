@@ -3,6 +3,7 @@ package com.crowdsight.mobile.app;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -149,6 +150,12 @@ public class MainActivity extends ActionBarActivity
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+       onNavigationDrawerItemSelected(3);
     }
 
     /**

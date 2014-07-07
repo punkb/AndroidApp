@@ -71,15 +71,15 @@ public class SignIn extends ActionBarActivity {
 
     public void addListenerButtons() {
 
-        newaccountButton = (ImageButton) findViewById(R.id.imageButton);
-        newaccountButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                //TODO: call new account activity
-                Toast.makeText(SignIn.this, "New account not available!", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        newaccountButton = (ImageButton) findViewById(R.id.imageButton);
+//        newaccountButton.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View arg0) {
+//                //TODO: call new account activity
+//                Toast.makeText(SignIn.this, "New account not available!", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
 //        facebookButton = (ImageButton) findViewById(R.id.imageButton3);
 //        facebookButton.setOnClickListener(new View.OnClickListener() {
@@ -110,17 +110,17 @@ public class SignIn extends ActionBarActivity {
 //                Toast.makeText(SignIn.this, "Twitter services not available!", Toast.LENGTH_SHORT).show();
 //            }
 //        });
-
-        loginButton = (ImageButton) findViewById(R.id.imageButton2);
-        loginButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                //TODO: check email/password are correct filled
-                Intent i = new Intent(SignIn.this, MainActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
+//
+//        loginButton = (ImageButton) findViewById(R.id.imageButton2);
+//        loginButton.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View arg0) {
+//                //TODO: check email/password are correct filled
+//                Intent i = new Intent(SignIn.this, MainActivity.class);
+//                startActivity(i);
+//                finish();
+//            }
+//        });
     }
 }

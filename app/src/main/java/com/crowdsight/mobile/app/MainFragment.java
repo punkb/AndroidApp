@@ -54,6 +54,7 @@ public class MainFragment extends Fragment {
 
     private void onSessionStateChange(Session session, SessionState state, Exception exception) {
         if (state.isOpened()) {
+            userInfo.setVisibility(View.VISIBLE);
 
             Request.newMeRequest(session, new Request.GraphUserCallback() {
 
@@ -61,11 +62,16 @@ public class MainFragment extends Fragment {
                 public void onCompleted(GraphUser user, Response response) {
                     if (user != null) {
                         // Display the parsed user info
-
                         userInfo.setText(buildUserInfoDisplay(user));
+
+                        // calling photoofday for now. we can change the activity to any other activity
+                        Intent i = new Intent(MainFragment.this.getActivity(),photoofday.class);
+                        startActivity(i);
                     }
                 }
+
             }).executeAsync();
+
 
 
             Log.i(TAG, "Logged in...");
@@ -131,6 +137,7 @@ public class MainFragment extends Fragment {
 
         uiHelper = new UiLifecycleHelper(getActivity(), callback);
         uiHelper.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -153,6 +160,9 @@ public class MainFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         uiHelper.onActivityResult(requestCode, resultCode, data);
+
+
+
     }
 
     @Override
@@ -166,6 +176,7 @@ public class MainFragment extends Fragment {
         super.onDestroy();
         uiHelper.onDestroy();
     }
+
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
