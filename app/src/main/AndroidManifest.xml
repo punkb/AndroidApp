@@ -57,6 +57,7 @@
             android:name="com.facebook.LoginActivity"
             android:label="@string/title_ActivityLogin" >
         </activity>
+
     </application>
 
 </manifest>
