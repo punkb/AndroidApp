@@ -71,6 +71,18 @@
         android:layout_marginBottom="15dp"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Check Camera Feature"
+        android:id="@+id/btnTestCameraFeature"
+        android:layout_below="@+id/authButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="#ff053dff"
+        android:textColor="#ffffff"
+        android:textStyle="bold"/>
+
     <!--<ImageButton-->
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content"-->

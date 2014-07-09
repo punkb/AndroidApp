@@ -18,7 +18,7 @@
     <string name="title_activity_inside">inside</string>
     <string name="title_activity_track_location">TrackLocation</string>
     <string name="app_id">253436634864563</string>
-
     <string name="title_ActivityLogin">LoginActivity</string>
+    <string name="title_activity_camera">CameraActivity</string>
 
 </resources>
