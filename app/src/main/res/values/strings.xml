@@ -24,6 +24,8 @@
     <string name="title_activity_SplashFragment">SplashFragment</string>
     <string name="title_activity_SelectionFragment">SelectionFragment</string>
     <string name="settings">Settings</string>
+    <string name="action_settings">Settings</string>
+    <string name="album_name">CrowdsightImages</string>
 
 
 </resources>
