@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <!-- Permissions required for camera feature -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-feature android:name="android.hardware.Camera"/>
     <uses-permission android:name="android.permission.CAMERA"/>
@@ -34,10 +33,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SignIn"
-            android:label="@string/title_activity_sign_in" >
-        </activity>
+        <!-- <activity -->
+        <!-- android:name=".SignIn" -->
+        <!-- android:label="@string/title_activity_sign_in" > -->
+        <!-- </activity> -->
         <activity
             android:name=".inside"
             android:label="@string/title_activity_inside"
@@ -62,7 +61,10 @@
             android:name="com.facebook.LoginActivity"
             android:label="@string/title_ActivityLogin" >
         </activity>
-
+        <activity
+            android:name=".CameraActivity"
+            android:label="@string/title_activity_camera" >
+        </activity>
     </application>
 
 </manifest>
