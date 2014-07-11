@@ -11,65 +11,80 @@
     >
 
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="12"
-        android:id="@+id/editText"
-        android:background="@android:color/white"
-        android:hint="Email"
-        android:textSize="20dp"
-        android:padding="7dp"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="5dp" />
+        android:text="Hello"
+        android:textColor="#FFFFFF"
+        android:id="@+id/userInfo"
+        android:visibility="invisible"
+        />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="12"
-        android:id="@+id/editText2"
-        android:background="@android:color/white"
-        android:layout_gravity="center_vertical"
-        android:hint="Password"
-        android:textSize="20dp"
-        android:padding="7dp"
-        android:layout_below="@+id/editText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/editText"
-        android:layout_alignEnd="@+id/editText"
-        android:layout_marginTop="5dp" />
 
-    <ImageButton
+    <com.facebook.widget.LoginButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageButton"
-        android:src="@drawable/newaccount"
-        android:background="@null"
+        android:id="@+id/authButton"
+        android:layout_marginTop="40dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"/>
 
-   <com.facebook.widget.LoginButton
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:id="@+id/authButton"
-       android:layout_marginTop="40dp"/>
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageButton2"
-        android:src="@drawable/login"
-        android:background="@null"
-        android:layout_above="@+id/imageButton"
-        android:layout_marginBottom="15dp"
-        android:layout_centerHorizontal="true" />
+
+    <!--<EditText-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:inputType="textEmailAddress"-->
+        <!--android:ems="12"-->
+        <!--android:id="@+id/editText"-->
+        <!--android:background="@android:color/white"-->
+        <!--android:hint="Email"-->
+        <!--android:textSize="20dp"-->
+        <!--android:padding="7dp"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_marginBottom="5dp" />-->
+
+    <!--<EditText-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:inputType="textPassword"-->
+        <!--android:ems="12"-->
+        <!--android:id="@+id/editText2"-->
+        <!--android:background="@android:color/white"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:hint="Password"-->
+        <!--android:textSize="20dp"-->
+        <!--android:padding="7dp"-->
+        <!--android:layout_below="@+id/editText"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignRight="@+id/editText"-->
+        <!--android:layout_alignEnd="@+id/editText"-->
+        <!--android:layout_marginTop="5dp" />-->
+
+    <!--<ImageButton-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/imageButton"-->
+        <!--android:src="@drawable/newaccount"-->
+        <!--android:background="@null"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_centerHorizontal="true" />-->
+
+
+    <!--<ImageButton-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/imageButton2"-->
+        <!--android:src="@drawable/login"-->
+        <!--android:background="@null"-->
+        <!--android:layout_above="@+id/imageButton"-->
+        <!--android:layout_marginBottom="15dp"-->
+        <!--android:layout_centerHorizontal="true" />-->
 
     <Button
         android:layout_width="wrap_content"

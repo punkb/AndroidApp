@@ -5,11 +5,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <!-- permssions required for camera feature -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-feature android:name="android.hardware.Camera"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -62,10 +57,7 @@
             android:name="com.facebook.LoginActivity"
             android:label="@string/title_ActivityLogin" >
         </activity>
-        <activity
-            android:name=".CameraActivity"
-            android:label="@string/title_activity_camera" >
-        </activity>
+
     </application>
 
 </manifest>

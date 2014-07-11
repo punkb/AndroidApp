@@ -2,14 +2,13 @@
 <resources>
 
     <string name="app_name">Crowdsight</string>
-    <string name="album_name">CrowdsightImages</string>
     <string name="title_section1">Venues</string>
     <string name="title_section2">Profile</string>
     <string name="title_section3">Logout</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Refresh</string>
-    <string name="action_settings">Settings</string>
+    <!--<string name="action_settings">Settings</string>-->
     <string name="title_activity_splash_screen">SplashScreen</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
@@ -19,7 +18,12 @@
     <string name="title_activity_inside">inside</string>
     <string name="title_activity_track_location">TrackLocation</string>
     <string name="app_id">253436634864563</string>
+
     <string name="title_ActivityLogin">LoginActivity</string>
-    <string name="title_activity_camera">CameraActivity</string>
+    <string name="get_started">To get started, log in using Facebook</string>
+    <string name="title_activity_SplashFragment">SplashFragment</string>
+    <string name="title_activity_SelectionFragment">SelectionFragment</string>
+    <string name="settings">Settings</string>
+
 
 </resources>
