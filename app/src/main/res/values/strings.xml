@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">Crowdsight</string>
+    <string name="album_name">CrowdsightImages</string>
     <string name="title_section1">Venues</string>
     <string name="title_section2">Profile</string>
     <string name="title_section3">Logout</string>
