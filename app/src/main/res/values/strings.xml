@@ -25,5 +25,14 @@
     <string name="title_activity_SelectionFragment">SelectionFragment</string>
     <string name="settings">Settings</string>
 
+    <string-array name="home_menu">
+        <item>Profile</item>
+        <item>Test</item>
+
+    </string-array>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
 
 </resources>
