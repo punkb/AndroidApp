@@ -26,9 +26,15 @@
     <string name="settings">Settings</string>
 
     <string-array name="home_menu">
-        <item>Profile</item>
-        <item>Test</item>
+        <item>Track Location</item>
+        <item>TrackLocationFragment</item>
+        <item>Log Out</item>
+   </string-array>
 
+    <string-array name="guest_menu">
+        <item>Log In</item>
+        <item>Crowdsight</item>
+        <item>About Us</item>
     </string-array>
 
     <string name="drawer_open">Open navigation drawer</string>

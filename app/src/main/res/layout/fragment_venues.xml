@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.crowdsight.mobile.app.Venues"
-    android:background="#ff000000">
+    android:background="#ff000000"
+    android:id="@+id/Venues">
 
     <ImageButton
         android:layout_width="wrap_content"

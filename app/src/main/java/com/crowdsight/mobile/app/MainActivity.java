@@ -37,12 +37,16 @@ public class MainActivity extends ActionBarActivity {
 
     private static final int SPLASH = 0;
     private static final int SELECTION = 1;
-   // private static final int SETTINGS = 2;
+    // private static final int SETTINGS = 2;
+
+
     private static final int FRAGMENT_COUNT = SELECTION + 1;
 
 
     private Fragment[] fragments = new Fragment[FRAGMENT_COUNT];
-   // private MenuItem settings;
+    // private MenuItem settings;
+
+
 
 
     private DrawerLayout drawer_Layout;
@@ -51,20 +55,13 @@ public class MainActivity extends ActionBarActivity {
     private CharSequence mTitle;
     private ActionBarDrawerToggle drawerListener;
     private CharSequence mDrawerTitle;
-
-
-
-
-
+    Session session = Session.getActiveSession();
+    private boolean menuChange = false;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
-
         setContentView(R.layout.activity_main);
 
         uiHelper = new UiLifecycleHelper(this, callback);
@@ -73,9 +70,16 @@ public class MainActivity extends ActionBarActivity {
 //        Now, hide the fragments initially in the onCreate() method:
 
         FragmentManager fm = getSupportFragmentManager();
-        fragments[SPLASH] = fm.findFragmentById(R.id.splashFragment);
-        fragments[SELECTION] = fm.findFragmentById(R.id.selectionFragment);
-       // fragments[SETTINGS] = fm.findFragmentById(R.id.userSettingsFragment);
+        SplashFragment loginFragment = (SplashFragment) fm.findFragmentById(R.id.splashFragment);
+        SelectionFragment profileFragment = (SelectionFragment) fm.findFragmentById(R.id.selectionFragment);
+
+
+
+
+        fragments[SPLASH] = loginFragment;
+        fragments[SELECTION] = profileFragment;
+
+        // fragments[SETTINGS] = fm.findFragmentById(R.id.userSettingsFragment);
 
         android.support.v4.app.FragmentTransaction transaction = fm.beginTransaction();
         for (int i = 0; i < fragments.length; i++) {
@@ -84,7 +88,6 @@ public class MainActivity extends ActionBarActivity {
         transaction.commit();
 
         // Navigation Drawer starts here
-
 
 
         drawer_Layout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -111,6 +114,7 @@ public class MainActivity extends ActionBarActivity {
                 super.onDrawerClosed(drawerView);
             }
         };
+
         drawer_Layout.setDrawerListener(drawerListener);
 
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -150,12 +154,43 @@ public class MainActivity extends ActionBarActivity {
 
     private void selectItem(int position) {
 
-        Toast.makeText(this, position + "was selected", Toast.LENGTH_LONG).show();
-        drawerListView.setItemChecked(position, true);
+        TrackLocationFragment tFragment = new TrackLocationFragment();
+        FragmentManager fm = getSupportFragmentManager();
+        android.support.v4.app.FragmentTransaction transaction = fm.beginTransaction();
+
+
+
+        switch (position) {
+            case 0:
+                Intent i = new Intent(this, TrackLocation.class);
+                startActivity(i);
+                break;
+            case 1:
+
+                transaction.replace(R.id.mainContent, tFragment);
+                transaction.commit();
+
+
+
+
+                break;
+            case 2:
+
+
+                showFragment(SPLASH, false);
+                break;
+
+
+        }
+
         setTitle(navigationMenu[position]);
+        drawer_Layout.closeDrawer(drawerListView);
     }
 
     //NavigationDrawer Ends Here
+
+    //    flag to indicate visible activity
+    private boolean isResumed = false;
 
 
 //    showing a given fragment and hiding all other fragments
@@ -167,18 +202,15 @@ public class MainActivity extends ActionBarActivity {
             if (i == fragmentIndex) {
                 transaction.show(fragments[i]);
             }
-//            else {
-//                transaction.hide(fragments[i]);
-//            }
+            else {
+                transaction.hide(fragments[i]);
+            }
         }
         if (addToBackStack) {
             transaction.addToBackStack(null);
         }
         transaction.commit();
     }
-
-    //    flag to indicate visible activity
-    private boolean isResumed = false;
 
 
     //    setting the flag when the activity is paused or resumed
@@ -187,6 +219,7 @@ public class MainActivity extends ActionBarActivity {
         super.onResume();
         uiHelper.onResume();
         isResumed = true;
+
     }
 
     @Override
@@ -235,15 +268,20 @@ public class MainActivity extends ActionBarActivity {
                 // If the session state is open:
                 // Show the authenticated fragment
                 showFragment(SELECTION, false);
-                showFragment(SPLASH, false);
+
+
+
 
             } else if (state.isClosed()) {
                 // If the session state is closed:
                 // Show the login fragment
                 showFragment(SPLASH, false);
+
+
             }
         }
     }
+
 
 //    make sure you handle the case where fragments are newly instantiated and the authenticated
 //    versus nonauthenticated UI needs to be properly set.
@@ -258,11 +296,13 @@ public class MainActivity extends ActionBarActivity {
             // if the session is already open,
             // try to show the selection fragment
             showFragment(SELECTION, false);
-           // showFragment(SPLASH, false);
+
+            // showFragment(SPLASH, false);
         } else {
             // otherwise present the splash screen
             // and ask the person to login.
             showFragment(SPLASH, false);
+
         }
     }
 
@@ -279,367 +319,8 @@ public class MainActivity extends ActionBarActivity {
                 }
             };
 
-
-//    @Override
-//    public boolean onPrepareOptionsMenu(Menu menu) {
-//        // only add the menu when the selection fragment is showing
-//        if (fragments[SELECTION].isVisible()) {
-//            if (menu.size() == 0) {
-//                settings = menu.add(R.string.settings);
-//            }
-//            return true;
-//        } else {
-//            menu.clear();
-//            settings = null;
-//        }
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        if (item.equals(settings)) {
-//            showFragment(SETTINGS, true);
-//            return true;
-//        }
-//        return false;
-//    }
-
-
-//  ****************************************************************************************
-//
-//    @Override
-//    public void onNavigationDrawerItemSelected(int position) {
-////        update the main content by replacing fragments
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//
-//
-//        switch (position) {
-//            case 0:
-//                fragmentManager.beginTransaction()
-//                        .replace(R.id.container, Venues.newInstance("param1", "param2"))
-//                        .commit();
-//                break;
-////            case 1:
-////                fragmentManager.beginTransaction()
-////                        .replace(R.id.container, inside.PlaceholderFragment.newInstance(position + 1))
-////                        .commit();
-////                break;
-////            case 2:
-////                fragmentManager.beginTransaction()
-////                        .replace(R.id.container, inside.PlaceholderFragment.newInstance(position + 1))
-////                        .commit();
-////                break;
-////            case 3:
-////                fragmentManager.beginTransaction()
-////                        .replace(R.id.container, inside.PlaceholderFragment.newInstance(position + 1))
-////                        .commit();
-////                break;
-//
-//        }
-//
-//    }
-//
-//    @Override
-//    public void onFragmentInteraction(Uri uri) {
-//
-//    }
-//
-//    public void onSectionAttached(int number) {
-//        switch (number) {
-//            case 1:
-//                mTitle = getString(R.string.title_section1);
-//                break;
-////            case 2:
-////                mTitle = getString(R.string.title_section2);
-////                break;
-//
-//
-//        }
-//
-//    }
-//
-//
-//
-//    public void restoreActionBar() {
-//        ActionBar actionBar = getSupportActionBar();
-//        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-//        actionBar.setDisplayShowTitleEnabled(true);
-//        actionBar.setTitle(mTitle);
-//    }
-//
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        if (!mNavigationDrawerFragment.isDrawerOpen()) {
-//            // Only show items in the action bar relevant to this screen
-//            // if the drawer is not showing. Otherwise, let the drawer
-//            // decide what to show in the action bar.
-//            getMenuInflater().inflate(R.menu.main, menu);
-//            restoreActionBar();
-//            return true;
-//        }
-//        return super.onCreateOptionsMenu(menu);
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//        if (id == R.id.action_settings) {
-//            Intent i = new Intent(MainActivity.this, TrackLocation.class);
-//            startActivity(i);
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
-//
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//       onNavigationDrawerItemSelected(1);
-//    }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-//    public static class PlaceholderFragment extends Fragment implements View.OnClickListener {
-//        /**
-//         * The fragment argument representing the section number for this
-//         * fragment.
-//         */
-//        private static final String ARG_SECTION_NUMBER = "section_number";
-//
-//        /**
-//         * Returns a new instance of this fragment for the given section
-//         * number.
-//         */
-//        public static PlaceholderFragment newInstance(int sectionNumber) {
-//            PlaceholderFragment fragment = new PlaceholderFragment();
-//            Bundle args = new Bundle();
-//            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-//            fragment.setArguments(args);
-//            return fragment;
-//        }
-//
-//        public PlaceholderFragment() {
-//        }
-//
-//        @Override
-//        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                Bundle savedInstanceState) {
-//            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-//            return rootView;
-//        }
-//
-//        @Override
-//        public void onAttach(Activity activity) {
-//            super.onAttach(activity);
-//            ((MainActivity) activity).onSectionAttached(
-//                    getArguments().getInt(ARG_SECTION_NUMBER));
-//        }
-//
-//        @Override
-//        public void onClick(View v) {
-//            switch(v.getId()){
-//                case R.id.imageOffers:
-//                    Toast.makeText(v.getContext(), "Offer not available!", Toast.LENGTH_SHORT);
-//                    break;
-//                case R.id.imageRewards:
-//                    Toast.makeText(v.getContext(), "Rewards not available!", Toast.LENGTH_SHORT);
-//                    break;
-//            }
-//        }
-//    }
-
-
 }
 
 
 
-////  The code below is old prototype code with menu
-//
-////        implements NavigationDrawerFragment.NavigationDrawerCallbacks,
-////        Venues.OnFragmentInteractionListener {
-////
-//    /**
-//     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
-//     */
-//    private NavigationDrawerFragment mNavigationDrawerFragment;
-//
-//    /**
-//     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
-//     */
-//    private CharSequence mTitle;
-//
-////    @Override
-////    protected void onCreate(Bundle savedInstanceState) {
-////        super.onCreate(savedInstanceState);
-////        setContentView(R.layout.activity_main);
-////
-////        mNavigationDrawerFragment = (NavigationDrawerFragment)
-////                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-////        mTitle = getTitle();
-////
-////        // Set up the drawer.
-////        mNavigationDrawerFragment.setUp(
-////                R.id.navigation_drawer,
-////                (DrawerLayout) findViewById(R.id.drawer_layout));
-////    }
-//
-//    @Override
-//    public void onFragmentInteraction(Uri uri) {
-//
-//    }
-//
-//    @Override
-//    public void onNavigationDrawerItemSelected(int position) {
-//        // update the main content by replacing fragments
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//
-//
-//        switch (position) {
-//            case 0:
-//                fragmentManager.beginTransaction()
-//                        .replace(R.id.container, Venues.newInstance("param1", "param2"))
-//                        .commit();
-//                break;
-//            case 1:
-//                fragmentManager.beginTransaction()
-//                        .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-//                        .commit();
-//                break;
-//            case 2:
-//                Intent i = new Intent(MainActivity.this, TrackLocation.class);
-//                startActivity(i);
-//                break;
-//            case 3:
-//            try {
-//
-//                    Intent t = new Intent(MainActivity.this, TrackLocation.class);
-//                    startActivity(t);
-//                    break;
-//
-//            }catch (Exception e){
-//                e.printStackTrace();
-//            }
-//
-//        }
-//
-//    }
-//
-//    public void onSectionAttached(int number) {
-//        switch (number) {
-//            case 1:
-//                mTitle = getString(R.string.title_section1);
-//                break;
-//            case 2:
-//                mTitle = getString(R.string.title_section2);
-//                break;
-//            case 3:
-//                Intent i = new Intent(MainActivity.this, TrackLocation.class);
-//                startActivity(i);
-//                break;
-//            case 4:
-//                Intent t = new Intent(MainActivity.this, TrackLocation.class);
-//                startActivity(t);
-//                break;
-//        }
-//    }
-//
-//    public void restoreActionBar() {
-//        ActionBar actionBar = getSupportActionBar();
-//        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-//        actionBar.setDisplayShowTitleEnabled(true);
-//        actionBar.setTitle(mTitle);
-//    }
-//
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        if (!mNavigationDrawerFragment.isDrawerOpen()) {
-//            // Only show items in the action bar relevant to this screen
-//            // if the drawer is not showing. Otherwise, let the drawer
-//            // decide what to show in the action bar.
-//            getMenuInflater().inflate(R.menu.main, menu);
-//            restoreActionBar();
-//            return true;
-//        }
-//        return super.onCreateOptionsMenu(menu);
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//        if (id == R.id.action_settings) {
-//            Intent i = new Intent(MainActivity.this, SettingsActivity.class);
-//            startActivity(i);
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
-//
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//       onNavigationDrawerItemSelected(3);
-//    }
-//
-//
-//    /**
-//     * A placeholder fragment containing a simple view.
-//     */
-//    public static class PlaceholderFragment extends Fragment implements View.OnClickListener {
-//        /**
-//         * The fragment argument representing the section number for this
-//         * fragment.
-//         */
-//        private static final String ARG_SECTION_NUMBER = "section_number";
-//
-//        /**
-//         * Returns a new instance of this fragment for the given section
-//         * number.
-//         */
-//        public static PlaceholderFragment newInstance(int sectionNumber) {
-//            PlaceholderFragment fragment = new PlaceholderFragment();
-//            Bundle args = new Bundle();
-//            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-//            fragment.setArguments(args);
-//            return fragment;
-//        }
-//
-//        public PlaceholderFragment() {
-//        }
-//
-//        @Override
-//        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                Bundle savedInstanceState) {
-//            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-//            return rootView;
-//        }
-//
-//        @Override
-//        public void onAttach(Activity activity) {
-//            super.onAttach(activity);
-//            ((MainActivity) activity).onSectionAttached(
-//                    getArguments().getInt(ARG_SECTION_NUMBER));
-//        }
-//
-//        @Override
-//        public void onClick(View v) {
-//            switch(v.getId()){
-//                case R.id.imageOffers:
-//                    Toast.makeText(v.getContext(), "Offer not available!", Toast.LENGTH_SHORT);
-//                    break;
-//                case R.id.imageRewards:
-//                    Toast.makeText(v.getContext(), "Rewards not available!", Toast.LENGTH_SHORT);
-//                    break;
-//            }
-//        }
-//    }
 
-//}
