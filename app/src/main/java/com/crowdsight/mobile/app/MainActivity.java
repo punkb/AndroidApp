@@ -14,6 +14,7 @@ import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Selection;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -37,7 +38,7 @@ public class MainActivity extends ActionBarActivity {
 
     private static final int SPLASH = 0;
     private static final int SELECTION = 1;
-    // private static final int SETTINGS = 2;
+
     private static final int TRACK = 2;
     private static final int PHOTOOFDAY = 3;
     private static final int VENUES = 4;
@@ -76,10 +77,12 @@ public class MainActivity extends ActionBarActivity {
         FragmentManager fm = getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction transaction = fm.beginTransaction();
 
-        //Login Logout Fragment
-        SplashFragment loginFragment = (SplashFragment) fm.findFragmentById(R.id.splashFragment);
-        //Profile Fragment
-        SelectionFragment profileFragment = (SelectionFragment) fm.findFragmentById(R.id.selectionFragment);
+
+        SplashFragment loginFragment = new SplashFragment();
+        transaction.add(R.id.mainContent, loginFragment);
+
+        SelectionFragment profileFragment = new SelectionFragment();
+        transaction.add(R.id.mainContent, profileFragment);
 
         //Track Location Fragment TO-DO: this is a test fragment.
         // Need to add rest of the fragments in the same way
