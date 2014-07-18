@@ -34,7 +34,10 @@ import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 
 
-public class MainActivity extends ActionBarActivity implements Venues.OnFragmentInteractionListener, photoofday.OnFragmentInteractionListener {
+public class MainActivity extends ActionBarActivity
+        implements
+        Venues.OnFragmentInteractionListener,
+        photoofday.OnFragmentInteractionListener {
 
     private static final int SPLASH = 0;
     private static final int SELECTION = 1;
