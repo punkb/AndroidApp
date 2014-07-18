@@ -28,7 +28,7 @@ public class SelectionFragment extends Fragment {
     private static final String TAG = "SelectionFragment";
     private ProfilePictureView profilePictureView;
     private TextView userNameView;
-    private Button uploadImage;
+    private Button uploadImage, loginTwitter;
 
 //    define a private constant that you'll use later on whenever you make a new permissions request.
 //    You'll use it to decide whether to update a session's info in the onActivityResult() metho
@@ -55,6 +55,7 @@ public class SelectionFragment extends Fragment {
 // Find the user's name view
         userNameView = (TextView) view.findViewById(R.id.selection_user_name);
         uploadImage = (Button) view.findViewById(R.id.uploadButton);
+        loginTwitter = (Button) view.findViewById(R.id.btnTwitterLogin);
 
         uploadImage.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -64,6 +65,16 @@ public class SelectionFragment extends Fragment {
                 Intent cameraIntent = new Intent(getActivity(), CameraActivity.class);
                 startActivity(cameraIntent);
 
+            }
+        });
+
+        //Trigger Twitter Login
+        loginTwitter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //open the twitterLogin Activity
+               Intent twitterIntent = new Intent(getActivity(), TwitterLoginActivity.class);
+               startActivity(twitterIntent);
             }
         });
 
