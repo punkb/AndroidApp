@@ -38,25 +38,29 @@ public class MainActivity extends ActionBarActivity {
     private static final int SPLASH = 0;
     private static final int SELECTION = 1;
     // private static final int SETTINGS = 2;
+    private static final int TRACK = 2;
+    private static final int PHOTOOFDAY = 3;
+    private static final int VENUES = 4;
 
 
-    private static final int FRAGMENT_COUNT = SELECTION + 1;
+
+    private static final int FRAGMENT_COUNT = TRACK + 1;
 
 
     private Fragment[] fragments = new Fragment[FRAGMENT_COUNT];
+
     // private MenuItem settings;
-
-
-
 
     private DrawerLayout drawer_Layout;
     private ListView drawerListView;
     private String[] navigationMenu;
-    private CharSequence mTitle;
+
     private ActionBarDrawerToggle drawerListener;
     private CharSequence mDrawerTitle;
     Session session = Session.getActiveSession();
-    private boolean menuChange = false;
+    int LastSelectedFragment = 0;
+
+
 
 
     @Override
@@ -67,28 +71,51 @@ public class MainActivity extends ActionBarActivity {
         uiHelper = new UiLifecycleHelper(this, callback);
         uiHelper.onCreate(savedInstanceState);
 
-//        Now, hide the fragments initially in the onCreate() method:
+
 
         FragmentManager fm = getSupportFragmentManager();
+        android.support.v4.app.FragmentTransaction transaction = fm.beginTransaction();
+
+        //Login Logout Fragment
         SplashFragment loginFragment = (SplashFragment) fm.findFragmentById(R.id.splashFragment);
+        //Profile Fragment
         SelectionFragment profileFragment = (SelectionFragment) fm.findFragmentById(R.id.selectionFragment);
 
+        //Track Location Fragment TO-DO: this is a test fragment.
+        // Need to add rest of the fragments in the same way
+        TrackLocationFragment tFragment = new TrackLocationFragment();
+        transaction.add(R.id.mainContent,tFragment);
+
+//        photoofday PhotoOfDayFragment = new photoofday();
+//        transaction.add(R.id.mainContent,PhotoOfDayFragment);
+//
+//        Venues VenuesFragment = new Venues();
+//        transaction.add(R.id.mainContent,VenuesFragment);
 
 
 
+        //Assigning each fragment instance to fragments[]
         fragments[SPLASH] = loginFragment;
         fragments[SELECTION] = profileFragment;
+        fragments[TRACK] = tFragment;
 
-        // fragments[SETTINGS] = fm.findFragmentById(R.id.userSettingsFragment);
+//        fragments[PHOTOOFDAY] = PhotoOfDayFragment;
+//        fragments[VENUES] = VenuesFragment;
 
-        android.support.v4.app.FragmentTransaction transaction = fm.beginTransaction();
-        for (int i = 0; i < fragments.length; i++) {
-            transaction.hide(fragments[i]);
-        }
+
+//        Now, hide the fragments initially in the onCreate() method:
+        transaction.hide(loginFragment);
+        transaction.hide(profileFragment);
+        transaction.hide(tFragment);
+//        transaction.hide(PhotoOfDayFragment);
+//        transaction.hide(VenuesFragment);
+
+//        for (int i = 0; i < fragments.length; i++) {
+//            transaction.hide(fragments[i]);
+//        }
         transaction.commit();
 
         // Navigation Drawer starts here
-
 
         drawer_Layout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerListView = (ListView) findViewById(R.id.drawerList);
@@ -147,17 +174,17 @@ public class MainActivity extends ActionBarActivity {
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView parent, View view, int position, long id) {
+            LastSelectedFragment = position;
             selectItem(position);
+
             // Toast.makeText(this, navigationMenu[position]+"was selected", Toast.LENGTH_LONG).show();
         }
     }
 
     private void selectItem(int position) {
 
-        TrackLocationFragment tFragment = new TrackLocationFragment();
         FragmentManager fm = getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction transaction = fm.beginTransaction();
-
 
 
         switch (position) {
@@ -166,21 +193,17 @@ public class MainActivity extends ActionBarActivity {
                 startActivity(i);
                 break;
             case 1:
-
-                transaction.replace(R.id.mainContent, tFragment);
-                transaction.commit();
-
-
-
-
+                showFragment(TRACK,false);
                 break;
-            case 2:
-
-
+//            case 2:
+//                showFragment(PHOTOOFDAY, false);
+//                break;
+//            case 3:
+//                showFragment(VENUES, false);
+//                break;
+            case 4:
                 showFragment(SPLASH, false);
                 break;
-
-
         }
 
         setTitle(navigationMenu[position]);

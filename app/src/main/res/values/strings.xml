@@ -27,7 +27,9 @@
 
     <string-array name="home_menu">
         <item>Track Location</item>
-        <item>TrackLocationFragment</item>
+        <item>Track Location Fragment</item>
+        <item>Photo Of The Day </item>
+        <item>Venues</item>
         <item>Log Out</item>
    </string-array>
 
