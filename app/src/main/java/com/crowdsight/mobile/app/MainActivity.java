@@ -14,10 +14,7 @@ import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.Selection;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.Menu;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,11 +39,11 @@ public class MainActivity extends ActionBarActivity implements Venues.OnFragment
     private static final int TRACK = 2;
 
     private static final int VENUES = 3;
-  //  private static final int PHOTOOFDAY = 4;
+    private static final int PHOTOOFDAY = 4;
 
 
 
-    private static final int FRAGMENT_COUNT = VENUES + 1;
+    private static final int FRAGMENT_COUNT = PHOTOOFDAY + 1;
 
 
     private Fragment[] fragments = new Fragment[FRAGMENT_COUNT];
@@ -78,45 +75,42 @@ public class MainActivity extends ActionBarActivity implements Venues.OnFragment
         FragmentManager fm = getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction transaction = fm.beginTransaction();
 
-
-        SplashFragment loginFragment = new SplashFragment();
-        transaction.add(R.id.mainContent, loginFragment);
-
-        SelectionFragment profileFragment = new SelectionFragment();
-        transaction.add(R.id.mainContent, profileFragment);
-
         //Track Location Fragment TO-DO: this is a test fragment.
         // Need to add rest of the fragments in the same way
         TrackLocationFragment tFragment = new TrackLocationFragment();
         transaction.add(R.id.mainContent,tFragment);
+        fragments[TRACK] = tFragment;
 
-//        photoofday PhotoOfDayFragment = new photoofday();
-//        transaction.add(R.id.mainContent,PhotoOfDayFragment);
+        SplashFragment loginFragment = new SplashFragment();
+        transaction.add(R.id.mainContent, loginFragment);
+        fragments[SPLASH] = loginFragment;
+
+        SelectionFragment profileFragment = new SelectionFragment();
+        transaction.add(R.id.mainContent, profileFragment);
+        fragments[SELECTION] = profileFragment;
 
         Venues VenuesFragment = new Venues();
         transaction.add(R.id.mainContent,VenuesFragment);
+        fragments[VENUES] = VenuesFragment;
 
 
-
-        //Assigning each fragment instance to fragments[]
-        fragments[SPLASH] = loginFragment;
-        fragments[SELECTION] = profileFragment;
-        fragments[TRACK] = tFragment;
-
-//        fragments[PHOTOOFDAY] = PhotoOfDayFragment;
-       fragments[VENUES] = VenuesFragment;
+        photoofday PhotoOfDayFragment = new photoofday();
+        transaction.add(R.id.mainContent,PhotoOfDayFragment);
+        fragments[PHOTOOFDAY] = PhotoOfDayFragment;
 
 
 //        Now, hide the fragments initially in the onCreate() method:
-        transaction.hide(loginFragment);
-        transaction.hide(profileFragment);
-        transaction.hide(tFragment);
-    //    transaction.hide(PhotoOfDayFragment);
-        transaction.hide(VenuesFragment);
 
-//        for (int i = 0; i < fragments.length; i++) {
-//            transaction.hide(fragments[i]);
-//        }
+        for (int i = 0; i < fragments.length; i++) {
+            transaction.hide(fragments[i]);
+        }
+//        transaction.hide(loginFragment);
+//        transaction.hide(profileFragment);
+//        transaction.hide(tFragment);
+//        transaction.hide(PhotoOfDayFragment);
+//        transaction.hide(VenuesFragment);
+
+
         transaction.commit();
 
         // Navigation Drawer starts here
@@ -192,8 +186,6 @@ public class MainActivity extends ActionBarActivity implements Venues.OnFragment
 
     private void selectItem(int position) {
 
-        FragmentManager fm = getSupportFragmentManager();
-        android.support.v4.app.FragmentTransaction transaction = fm.beginTransaction();
 
 
         switch (position) {
@@ -211,8 +203,8 @@ public class MainActivity extends ActionBarActivity implements Venues.OnFragment
                 showFragment(VENUES, false);
                 break;
             case 4:
-                //showFragment(PHOTOOFDAY, false);
-                Toast.makeText(this, "Not Implemented", Toast.LENGTH_LONG).show();
+                showFragment(PHOTOOFDAY, false);
+//                Toast.makeText(this, "Not Implemented", Toast.LENGTH_LONG).show();
                 break;
             case 5:
                 showFragment(SPLASH, false);
