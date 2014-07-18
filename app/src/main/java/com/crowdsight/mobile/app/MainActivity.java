@@ -34,18 +34,19 @@ import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements Venues.OnFragmentInteractionListener, photoofday.OnFragmentInteractionListener {
 
     private static final int SPLASH = 0;
     private static final int SELECTION = 1;
 
     private static final int TRACK = 2;
-    private static final int PHOTOOFDAY = 3;
-    private static final int VENUES = 4;
+
+    private static final int VENUES = 3;
+  //  private static final int PHOTOOFDAY = 4;
 
 
 
-    private static final int FRAGMENT_COUNT = TRACK + 1;
+    private static final int FRAGMENT_COUNT = VENUES + 1;
 
 
     private Fragment[] fragments = new Fragment[FRAGMENT_COUNT];
@@ -91,9 +92,9 @@ public class MainActivity extends ActionBarActivity {
 
 //        photoofday PhotoOfDayFragment = new photoofday();
 //        transaction.add(R.id.mainContent,PhotoOfDayFragment);
-//
-//        Venues VenuesFragment = new Venues();
-//        transaction.add(R.id.mainContent,VenuesFragment);
+
+        Venues VenuesFragment = new Venues();
+        transaction.add(R.id.mainContent,VenuesFragment);
 
 
 
@@ -103,15 +104,15 @@ public class MainActivity extends ActionBarActivity {
         fragments[TRACK] = tFragment;
 
 //        fragments[PHOTOOFDAY] = PhotoOfDayFragment;
-//        fragments[VENUES] = VenuesFragment;
+       fragments[VENUES] = VenuesFragment;
 
 
 //        Now, hide the fragments initially in the onCreate() method:
         transaction.hide(loginFragment);
         transaction.hide(profileFragment);
         transaction.hide(tFragment);
-//        transaction.hide(PhotoOfDayFragment);
-//        transaction.hide(VenuesFragment);
+    //    transaction.hide(PhotoOfDayFragment);
+        transaction.hide(VenuesFragment);
 
 //        for (int i = 0; i < fragments.length; i++) {
 //            transaction.hide(fragments[i]);
@@ -174,6 +175,11 @@ public class MainActivity extends ActionBarActivity {
         drawerListener.syncState();
     }
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView parent, View view, int position, long id) {
@@ -198,13 +204,17 @@ public class MainActivity extends ActionBarActivity {
             case 1:
                 showFragment(TRACK,false);
                 break;
-//            case 2:
-//                showFragment(PHOTOOFDAY, false);
-//                break;
-//            case 3:
-//                showFragment(VENUES, false);
-//                break;
+            case 2:
+                showFragment(SELECTION, false);
+                break;
+            case 3:
+                showFragment(VENUES, false);
+                break;
             case 4:
+                //showFragment(PHOTOOFDAY, false);
+                Toast.makeText(this, "Not Implemented", Toast.LENGTH_LONG).show();
+                break;
+            case 5:
                 showFragment(SPLASH, false);
                 break;
         }
