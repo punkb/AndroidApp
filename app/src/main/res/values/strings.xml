@@ -32,6 +32,7 @@
         <item>Venues</item>
         <item>Photo Of Day</item>
         <item>Log Out</item>
+        <item>Photo Gallery</item>
    </string-array>
 
     <string-array name="guest_menu">

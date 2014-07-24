@@ -39,6 +39,8 @@ public class MainActivity extends ActionBarActivity
         Venues.OnFragmentInteractionListener,
         photoofday.OnFragmentInteractionListener {
 
+    public static final int SELECT_PHOTO_ACTION = 0;
+
     private static final int SPLASH = 0;
     private static final int SELECTION = 1;
 
@@ -46,10 +48,12 @@ public class MainActivity extends ActionBarActivity
 
     private static final int VENUES = 3;
     private static final int PHOTOOFDAY = 4;
+    private static final int PHOTOGALLERY = 5;
 
 
 
-    private static final int FRAGMENT_COUNT = PHOTOOFDAY + 1;
+
+    private static final int FRAGMENT_COUNT = PHOTOGALLERY + 1;
 
 
     private Fragment[] fragments = new Fragment[FRAGMENT_COUNT];
@@ -59,6 +63,8 @@ public class MainActivity extends ActionBarActivity
     private DrawerLayout drawer_Layout;
     private ListView drawerListView;
     private String[] navigationMenu;
+    private String[] noSessionMenu;
+
 
     private ActionBarDrawerToggle drawerListener;
     private CharSequence mDrawerTitle;
@@ -103,6 +109,10 @@ public class MainActivity extends ActionBarActivity
         photoofday PhotoOfDayFragment = new photoofday();
         transaction.add(R.id.mainContent,PhotoOfDayFragment);
         fragments[PHOTOOFDAY] = PhotoOfDayFragment;
+
+        PhotoGalleryFragment photoGallery = new PhotoGalleryFragment();
+        transaction.add(R.id.mainContent,photoGallery);
+        fragments[PHOTOGALLERY] = photoGallery;
 
 
 //        Now, hide the fragments initially in the onCreate() method:
@@ -214,6 +224,9 @@ public class MainActivity extends ActionBarActivity
                 break;
             case 5:
                 showFragment(SPLASH, false);
+                break;
+            case 6:
+                showFragment(PHOTOGALLERY, false);
                 break;
         }
 
