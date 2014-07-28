@@ -39,7 +39,9 @@ public class MainActivity extends ActionBarActivity
         implements
         Venues.OnFragmentInteractionListener,
         photoofday.OnFragmentInteractionListener,
-        BaseFragment.OnFragmentInteractionListener {
+        BaseFragment.OnFragmentInteractionListener,
+        PhotoGalleryFragment.OnFragmentInteractionListener
+{
 
     public static final int SELECT_PHOTO_ACTION = 0;
 
@@ -50,15 +52,16 @@ public class MainActivity extends ActionBarActivity
 
     private static final int VENUES = 3;
     private static final int PHOTOOFDAY = 4;
-    private static final int PHOTOGALLERY = 5;
+    //private static final int PHOTOGALLERY = 5;
 
 
 
 
-    private static final int FRAGMENT_COUNT = PHOTOGALLERY + 1;
+    private static final int FRAGMENT_COUNT = PHOTOOFDAY + 1;
 
 
     private Fragment[] fragments = new Fragment[FRAGMENT_COUNT];
+
 
     // private MenuItem settings;
 
@@ -115,9 +118,15 @@ public class MainActivity extends ActionBarActivity
         transaction.add(R.id.mainContent,PhotoOfDayFragment);
         fragments[PHOTOOFDAY] = PhotoOfDayFragment;
 
-        PhotoGalleryFragment photoGallery = new PhotoGalleryFragment();
-        transaction.add(R.id.mainContent,photoGallery);
-        fragments[PHOTOGALLERY] = photoGallery;
+//        PhotoGalleryFragment photoGallery = new PhotoGalleryFragment();
+//        transaction.add(R.id.mainContent, photoGallery);
+//        fragments[PHOTOGALLERY]= photoGallery;
+
+
+
+
+
+
 
 
 //        Now, hide the fragments initially in the onCreate() method:
@@ -241,7 +250,17 @@ public class MainActivity extends ActionBarActivity
                 showFragment(SPLASH, false);
                 break;
             case 6:
-                showFragment(PHOTOGALLERY, false);
+               //showFragment(PHOTOGALLERY,false);
+                FragmentManager fm = getSupportFragmentManager();
+                android.support.v4.app.FragmentTransaction transaction = fm.beginTransaction();
+
+
+                PhotoGalleryFragment photoGallery = new PhotoGalleryFragment();
+                    transaction.replace(R.id.mainContent, photoGallery);
+                transaction.commit();
+
+
+
                 break;
         }
 
@@ -329,7 +348,7 @@ public class MainActivity extends ActionBarActivity
             if (state.isOpened()) {
                 // If the session state is open:
                 // Show the authenticated fragment
-                showFragment(PHOTOGALLERY, false);
+                showFragment(SELECTION, false);
 
 
 
@@ -357,7 +376,7 @@ public class MainActivity extends ActionBarActivity
         if (session != null && session.isOpened()) {
             // if the session is already open,
             // try to show the selection fragment
-            showFragment(PHOTOGALLERY, false);
+            showFragment(SELECTION, false);
 
             // showFragment(SPLASH, false);
         } else {

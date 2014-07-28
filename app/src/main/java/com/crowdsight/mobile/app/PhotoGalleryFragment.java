@@ -3,7 +3,6 @@ package com.crowdsight.mobile.app;
 
 
 import android.app.Activity;
-import android.app.ListFragment;
 import android.app.LoaderManager;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -28,15 +27,14 @@ import com.crowdsight.mobile.app.util.PhotoGalleryAsyncLoader;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 
 /**
  * A simple {@link Fragment} subclass.
  *
  */
-public class PhotoGalleryFragment extends ListFragment implements AbsListView.OnItemClickListener,
-        LoaderManager.LoaderCallbacks<List<PhotoItem>> {
+public class PhotoGalleryFragment extends BaseFragment implements AbsListView.OnItemClickListener,
+        android.support.v4.app.LoaderManager.LoaderCallbacks<List<PhotoItem>> {
 
     // Ivars.
     protected OnFragmentInteractionListener mListener;
@@ -59,13 +57,13 @@ public class PhotoGalleryFragment extends ListFragment implements AbsListView.On
      * @param //sectionNumber
      * @return
      */
-//    public static PhotoGalleryFragment newInstance(int sectionNumber) {
-//        PhotoGalleryFragment fragment = new PhotoGalleryFragment();
-//        Bundle args = new Bundle();
-//        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
+    public static PhotoGalleryFragment newInstance(int sectionNumber) {
+        PhotoGalleryFragment fragment = new PhotoGalleryFragment();
+        Bundle args = new Bundle();
+        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -216,7 +214,7 @@ public class PhotoGalleryFragment extends ListFragment implements AbsListView.On
      * Loader Handlers for loading the photos in the background.
      */
     @Override
-    public Loader<List<PhotoItem>> onCreateLoader(int id, Bundle args) {
+    public android.support.v4.content.Loader<List<PhotoItem>> onCreateLoader(int id, Bundle args) {
         // This is called when a new Loader needs to be created.  This
         // sample only has one Loader with no arguments, so it is simple.
         return new PhotoGalleryAsyncLoader(getActivity());
@@ -225,8 +223,11 @@ public class PhotoGalleryFragment extends ListFragment implements AbsListView.On
 
 
 
+
+
+
     @Override
-    public void onLoadFinished(Loader<List<PhotoItem>> loader, List<PhotoItem> data) {
+    public void onLoadFinished(android.support.v4.content.Loader<List<PhotoItem>> loader, List<PhotoItem> data) {
         // Set the new data in the mAdapter.
         mPhotoListItem.clear();
 
@@ -241,7 +242,7 @@ public class PhotoGalleryFragment extends ListFragment implements AbsListView.On
     }
 
     @Override
-    public void onLoaderReset(Loader<List<PhotoItem>> loader) {
+    public void onLoaderReset(android.support.v4.content.Loader<List<PhotoItem>> loader) {
         // Clear the data in the mAdapter.
         mPhotoListItem.clear();
         mAdapter.notifyDataSetChanged();
