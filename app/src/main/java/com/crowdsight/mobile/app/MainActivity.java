@@ -2,6 +2,7 @@ package com.crowdsight.mobile.app;
 
 import android.app.Activity;
 import android.app.FragmentTransaction;
+import android.app.ListFragment;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
@@ -37,7 +38,8 @@ import com.facebook.UiLifecycleHelper;
 public class MainActivity extends ActionBarActivity
         implements
         Venues.OnFragmentInteractionListener,
-        photoofday.OnFragmentInteractionListener {
+        photoofday.OnFragmentInteractionListener,
+        BaseFragment.OnFragmentInteractionListener {
 
     public static final int SELECT_PHOTO_ACTION = 0;
 
@@ -86,6 +88,9 @@ public class MainActivity extends ActionBarActivity
 
         FragmentManager fm = getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction transaction = fm.beginTransaction();
+
+
+
 
         //Track Location Fragment TO-DO: this is a test fragment.
         // Need to add rest of the fragments in the same way
@@ -187,6 +192,16 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onFragmentInteraction(String id) {
+
+    }
+
+    @Override
+    public void onFragmentInteraction(int actionId) {
 
     }
 
@@ -314,7 +329,7 @@ public class MainActivity extends ActionBarActivity
             if (state.isOpened()) {
                 // If the session state is open:
                 // Show the authenticated fragment
-                showFragment(SELECTION, false);
+                showFragment(PHOTOGALLERY, false);
 
 
 
@@ -342,7 +357,7 @@ public class MainActivity extends ActionBarActivity
         if (session != null && session.isOpened()) {
             // if the session is already open,
             // try to show the selection fragment
-            showFragment(SELECTION, false);
+            showFragment(PHOTOGALLERY, false);
 
             // showFragment(SPLASH, false);
         } else {

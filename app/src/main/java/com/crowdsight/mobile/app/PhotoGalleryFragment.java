@@ -3,10 +3,12 @@ package com.crowdsight.mobile.app;
 
 
 import android.app.Activity;
+import android.app.ListFragment;
 import android.app.LoaderManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Loader;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -17,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
+
 
 import com.crowdsight.mobile.app.adapters.PhotoAdapter;
 import com.crowdsight.mobile.app.adapters.items.PhotoItem;
@@ -32,7 +35,7 @@ import java.util.Objects;
  * A simple {@link Fragment} subclass.
  *
  */
-public class PhotoGalleryFragment extends BaseFragment implements AbsListView.OnItemClickListener,
+public class PhotoGalleryFragment extends ListFragment implements AbsListView.OnItemClickListener,
         LoaderManager.LoaderCallbacks<List<PhotoItem>> {
 
     // Ivars.
@@ -43,6 +46,7 @@ public class PhotoGalleryFragment extends BaseFragment implements AbsListView.On
     protected TextView mEmptyTextView;
     protected ProgressDialog mLoadingProgressDialog;
 
+
     /**
      * Required empty constructor
      */
@@ -52,20 +56,20 @@ public class PhotoGalleryFragment extends BaseFragment implements AbsListView.On
 
     /**
      * Static factory method
-     * @param sectionNumber
+     * @param //sectionNumber
      * @return
      */
-    public static PhotoGalleryFragment newInstance(int sectionNumber) {
-        PhotoGalleryFragment fragment = new PhotoGalleryFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-        fragment.setArguments(args);
-        return fragment;
-    }
+//    public static PhotoGalleryFragment newInstance(int sectionNumber) {
+//        PhotoGalleryFragment fragment = new PhotoGalleryFragment();
+//        Bundle args = new Bundle();
+//        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+//        fragment.setArguments(args);
+//        return fragment;
+//    }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
         // Create an empty loader and pre-initialize the photo list items as an empty list.
         Context context = getActivity().getBaseContext();
@@ -78,9 +82,28 @@ public class PhotoGalleryFragment extends BaseFragment implements AbsListView.On
 
         // Prepare the loader.  Either re-connect with an existing one,
         // or start a new one.
-       getLoaderManager().initLoader(0, null, this);
-        //getSupportLoaderManager().initLoader(0, null, this);
+        getLoaderManager().initLoader(0, null,this);
+
     }
+
+//    @Override
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//
+//        // Create an empty loader and pre-initialize the photo list items as an empty list.
+//        Context context = getActivity().getBaseContext();
+//
+//        // Set up empty mAdapter
+//        mPhotoListItem = new ArrayList<PhotoItem>() ;
+//        mAdapter = new PhotoAdapter(context,
+//                R.layout.photo_item,
+//                mPhotoListItem, false);
+//
+//        // Prepare the loader.  Either re-connect with an existing one,
+//        // or start a new one.
+//       getLoaderManager().initLoader(0, null, this);
+//        //getSupportLoaderManager().initLoader(0, null, this);
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -235,6 +258,13 @@ public class PhotoGalleryFragment extends BaseFragment implements AbsListView.On
                 mLoadingProgressDialog.cancel();
             }
         }
+    }
+
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        public void onFragmentInteraction(Uri uri);
+        public void onFragmentInteraction(String id);
+        public void onFragmentInteraction(int actionId);
     }
 
 

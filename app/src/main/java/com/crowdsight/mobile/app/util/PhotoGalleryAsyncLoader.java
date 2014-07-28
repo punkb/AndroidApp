@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by pankaj on 23/07/14.
  */
-@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+//@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class PhotoGalleryAsyncLoader extends AsyncTaskLoader<List<PhotoItem>> {
 
     // Persistent list of photo list item

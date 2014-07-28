@@ -1,5 +1,6 @@
 package com.crowdsight.mobile.app;
 
+import android.app.ListFragment;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 
