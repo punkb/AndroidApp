@@ -71,10 +71,18 @@
             android:label="@string/title_activity_twitter_login" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="oauth" android:host="twit2android"/>
+
+                <data
+                    android:host="twit2android"
+                    android:scheme="oauth" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".TwitterWebActivity"
+            android:label="@string/title_activity_twitter_web" >
         </activity>
     </application>
 

@@ -27,5 +27,7 @@
     <string name="album_name">CrowdsightImages</string>
     <string name="title_activity_camera">Upload Picture</string>
     <string name="title_activity_twitter_login">TwitterLoginActivity</string>
+    <string name="title_activity_twitter_web">TwitterWebActivity</string>
+    <string name="twitter_callback">oauth://twit2android</string>
 
 </resources>

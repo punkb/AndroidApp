@@ -45,12 +45,35 @@
         android:textStyle="bold"/>
 
     <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/statusUpload"
+        android:text="Upload Status"
+        android:textStyle="bold"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="120dp"/>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/photoUpload"
+        android:text="Upload Photo"
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="120dp"
+        android:layout_alignParentRight="true"/>
+
+
+
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buttonTwitterLogout"
         android:text="Logout from Twitter"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="65dp" />
+        android:layout_marginBottom="30dp" />
 
 </RelativeLayout>

@@ -3,6 +3,7 @@ apply plugin: 'android'
 android {
     compileSdkVersion 19
     buildToolsVersion '20.0.0'  //change this to 19.1 depends on the Build Tools availability
+
     defaultConfig {
         minSdkVersion 9
         targetSdkVersion 19
@@ -15,7 +16,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
-    packagingOptions{
+    packagingOptions {
         exclude 'META-INF/LICENSE.txt'
     }
     productFlavors {
@@ -24,8 +25,12 @@ android {
 dependencies {
     compile files('libs/twitter4j-core-4.0.2.jar')
     compile files('libs/twitter4j-stream-4.0.2.jar')
+    compile files('libs/twitter4j-media-support-4.0.2.jar')
 }
 
+dependencies {
+    compile 'com.android.support:appcompat-v7:19.+'
+}
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':libraries:facebook')

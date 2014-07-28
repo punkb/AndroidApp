@@ -3,9 +3,13 @@ package com.crowdsight.mobile.app;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +17,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+
+import twitter4j.Status;
+import twitter4j.StatusUpdate;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
@@ -27,6 +35,9 @@ public class TwitterLoginActivity extends Activity {
 
     static String CONSUMER_KEY = "CV3otV0fHcA99rMaUzjZWAMb5";
     static String CONSUMER_SECRET = "2YO1m4Q6kMGf8SLG1J8nW6DqPRSDnetjMpNv76QYI3cvX2mnys";
+    static String ACCESS_TOKEN = "250951799-XuzNyvEzumHnnc9friA1jS7IRFNiHoPOTCFjTmWq";
+    static String ACCESS_TOKEN_SECRET = "xdPeQVa1LL48YTYMcMKgPSfJ1p4tSQsWtkOC2IdUXMGF3";
+    static String TWIT_PIC_API = "9d89bf17bc6be90a5e9c19d050640e86";
 
     static String PREFERENCE_NAME = "twitter_oauth";
     static final String PREF_KEY_SECRET = "oauth_token_secret";
@@ -40,6 +51,8 @@ public class TwitterLoginActivity extends Activity {
 
     private static final String TAG = "TwitAndroidSignIn";
 
+    private static final int GALLERY_CODE = 1;
+
     private static Twitter twitter;
     private static RequestToken requestToken;
     private static SharedPreferences mSharedPreferences;
@@ -47,7 +60,7 @@ public class TwitterLoginActivity extends Activity {
     private boolean running = false;
 
     //Declare Widgets
-    private Button loginTwitter, logoutTwitter;
+    private Button loginTwitter, logoutTwitter, imageUpload, uploadStatus;
     private TextView messageView;
     private EditText messageBox;
 
@@ -64,7 +77,9 @@ public class TwitterLoginActivity extends Activity {
 
         loginTwitter = (Button) findViewById(R.id.login_button);
         logoutTwitter = (Button) findViewById(R.id.buttonTwitterLogout);
+        imageUpload = (Button) findViewById(R.id.photoUpload);
         messageView = (TextView) findViewById(R.id.message);
+        uploadStatus = (Button) findViewById(R.id.statusUpload);
 
         loginTwitter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +96,25 @@ public class TwitterLoginActivity extends Activity {
                 disconnectTwitter();
                 Toast.makeText(getApplicationContext(), "Successfully Logged out from Twitter.", Toast.LENGTH_SHORT).show();
                 messageView.setText("Logged Out.");
+            }
+        });
+
+        imageUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isConnected()){
+                    Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(i, GALLERY_CODE);
+                }else{
+                    Toast.makeText(getApplicationContext(),"Please Login first to upload your image.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        
+        uploadStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+             //   uploadStatus("This is a random tweet test from android app.");
             }
         });
 
@@ -101,6 +135,19 @@ public class TwitterLoginActivity extends Activity {
         }
     }
 
+    private void uploadStatus(String tweet) {
+        try
+        {
+            Status status = twitter.updateStatus(tweet);
+            //System.out.println("Status updated to [" + status.getText() + "].");
+        }
+        catch (TwitterException te)
+        {
+            System.out.println("Error: "+ te.getMessage());
+        }
+
+    }
+
     //Method definition for onresume
     protected void onResume() {
         super.onResume();
@@ -119,7 +166,7 @@ public class TwitterLoginActivity extends Activity {
             twitterStream = new TwitterStreamFactory(conf).getInstance();
 
         } else {
-            messageView.setText("Logged In");
+            messageView.setText("Please log in to continue.");
         }
     }
 
@@ -143,24 +190,104 @@ public class TwitterLoginActivity extends Activity {
     //Ask User Authorization here
 
     private void askOAuth() {
-        try {
-            ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
-            configurationBuilder.setOAuthConsumerKey(CONSUMER_KEY);
-            configurationBuilder.setOAuthConsumerSecret(CONSUMER_SECRET);
-            Configuration configuration = configurationBuilder.build();
-            twitter = new TwitterFactory(configuration).getInstance();
 
+        ConfigurationBuilder cb = new ConfigurationBuilder();
+        cb.setOAuthConsumerKey(CONSUMER_KEY);
+        cb.setOAuthConsumerSecret(CONSUMER_SECRET);
+      //  cb.setOAuthAccessToken(ACCESS_TOKEN);
+      //  cb.setOAuthAccessTokenSecret(ACCESS_TOKEN_SECRET);
 
-            //Toast.makeText(this, "You are requesting authority", Toast.LENGTH_LONG).show();
-            //Toast.makeText(this, "You are Here inside askOuth", Toast.LENGTH_LONG).show();
-            requestToken = twitter.getOAuthRequestToken(CALLBACK_URL);
-            Toast.makeText(this, "Please authorize this app!", Toast.LENGTH_LONG).show();
-            this.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(requestToken.getAuthenticationURL())));
-            messageView.setText("Logged In");
-        } catch (TwitterException e) {
-            e.printStackTrace();
+        TwitterFactory tf = new TwitterFactory(cb.build());
+        twitter = tf.getInstance();
+        requestToken = null;
+
+        String callbackURL = getResources().getString(R.string.twitter_callback);
+        try{
+                requestToken = twitter.getOAuthRequestToken(callbackURL);
+        }catch (TwitterException e){
+             e.printStackTrace();
+        }
+
+        //requestToken = twitter.getOAuthRequestToken(CALLBACK_URL);
+        Toast.makeText(this, "Please authorize this app!", Toast.LENGTH_LONG).show();
+        this.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(requestToken.getAuthenticationURL())));
+        messageView.setText("Logged In");
+    }
+
+    /**save the captured image in onActivityResult**/
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data )
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+
+            if(requestCode == GALLERY_CODE){
+                if(resultCode == RESULT_OK && null != data){
+                    Uri selectedImage = data.getData();
+                    String[] filePathColumn = { MediaStore.Images.Media.DATA };
+                    Cursor cursor = getContentResolver().query(selectedImage,
+                            filePathColumn, null, null, null);
+                    cursor.moveToFirst();
+
+                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                    String picturePath = cursor.getString(columnIndex);
+                    cursor.close();
+
+                    //Toast.makeText(getApplicationContext(), "This is the path of the picture : "+picturePath, Toast.LENGTH_SHORT).show();
+
+                    uploadImage(new File(picturePath)); //compare the dates and display the image
+                }
+            }
+    }
+
+    public void uploadImage(File file){
+
+        if(file.exists()){
+            try {
+                StatusUpdate status = new StatusUpdate("This is my test status upload");
+               status.setMedia(file);
+                twitter.updateStatus(status);
+            } catch (TwitterException e) {
+                Log.d("TAG", "Pic Upload error" + e.getErrorMessage());
+            }
         }
     }
+
+    private Bitmap getScaledBitmap(String picturePath, int width, int height) {
+        BitmapFactory.Options sizeOptions = new BitmapFactory.Options();
+        sizeOptions.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(picturePath, sizeOptions);
+
+        int inSampleSize = calculateInSampleSize(sizeOptions, width, height);
+
+        sizeOptions.inJustDecodeBounds = false;
+        sizeOptions.inSampleSize = inSampleSize;
+
+        return BitmapFactory.decodeFile(picturePath, sizeOptions);
+    }
+
+    private int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+
+            // Calculate ratios of height and width to requested height and
+            // width
+            final int heightRatio = Math.round((float) height / (float) reqHeight);
+            final int widthRatio = Math.round((float) width / (float) reqWidth);
+
+            // Choose the smallest ratio as inSampleSize value, this will
+            // guarantee
+            // a final image with both dimensions larger than or equal to the
+            // requested height and width.
+            inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
+        }
+
+        return inSampleSize;
+    }
+
 
     //clear the shared preferences
     private void disconnectTwitter() {
