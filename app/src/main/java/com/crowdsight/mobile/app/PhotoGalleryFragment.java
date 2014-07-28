@@ -84,24 +84,24 @@ public class PhotoGalleryFragment extends BaseFragment implements AbsListView.On
 
     }
 
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//
-//        // Create an empty loader and pre-initialize the photo list items as an empty list.
-//        Context context = getActivity().getBaseContext();
-//
-//        // Set up empty mAdapter
-//        mPhotoListItem = new ArrayList<PhotoItem>() ;
-//        mAdapter = new PhotoAdapter(context,
-//                R.layout.photo_item,
-//                mPhotoListItem, false);
-//
-//        // Prepare the loader.  Either re-connect with an existing one,
-//        // or start a new one.
-//       getLoaderManager().initLoader(0, null, this);
-//        //getSupportLoaderManager().initLoader(0, null, this);
-//    }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // Create an empty loader and pre-initialize the photo list items as an empty list.
+        Context context = getActivity().getBaseContext();
+
+        // Set up empty mAdapter
+        mPhotoListItem = new ArrayList<PhotoItem>() ;
+        mAdapter = new PhotoAdapter(context,
+                R.layout.photo_item,
+                mPhotoListItem, false);
+
+        // Prepare the loader.  Either re-connect with an existing one,
+        // or start a new one.
+       getLoaderManager().initLoader(0, null, this);
+        //getSupportLoaderManager().initLoader(0, null, this);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater,

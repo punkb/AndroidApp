@@ -57,6 +57,7 @@ public class NavigationDrawerFragment extends Fragment {
     private int mCurrentSelectedPosition = 0;
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
+    String[] mNavigationMenu;
 
     public NavigationDrawerFragment() {
     }
@@ -67,6 +68,7 @@ public class NavigationDrawerFragment extends Fragment {
 
         // Read in the flag indicating whether or not the user has demonstrated awareness of the
         // drawer. See PREF_USER_LEARNED_DRAWER for details.
+        mNavigationMenu = getResources().getStringArray(R.array.home_menu);
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
         mUserLearnedDrawer = sp.getBoolean(PREF_USER_LEARNED_DRAWER, false);
 
@@ -101,14 +103,7 @@ public class NavigationDrawerFragment extends Fragment {
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_1,
                 android.R.id.text1,
-                new String[]{
-                        getString(R.string.title_activity_track_location),
-                        getString(R.string.title_activity_track_location),
-                        getString(R.string.title_activity_track_location),
-                        getString(R.string.title_activity_track_location),
-
-
-                }));
+                mNavigationMenu ));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }
@@ -250,10 +245,10 @@ public class NavigationDrawerFragment extends Fragment {
             return true;
         }
 
-        if (item.getItemId() == R.id.action_example) {
-            Toast.makeText(getActivity(), "Not implemented", Toast.LENGTH_SHORT).show();
-            return true;
-        }
+//        if (item.getItemId() == R.id.action_example) {
+//            Toast.makeText(getActivity(), "Not implemented", Toast.LENGTH_SHORT).show();
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }

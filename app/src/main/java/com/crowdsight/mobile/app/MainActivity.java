@@ -253,11 +253,11 @@ public class MainActivity extends ActionBarActivity
                //showFragment(PHOTOGALLERY,false);
                 FragmentManager fm = getSupportFragmentManager();
                 android.support.v4.app.FragmentTransaction transaction = fm.beginTransaction();
+                BaseFragment targetFragment = null;
 
-
-                PhotoGalleryFragment photoGallery = new PhotoGalleryFragment();
-                    transaction.replace(R.id.mainContent, photoGallery);
-                transaction.commit();
+                targetFragment = PhotoGalleryFragment.newInstance(6);
+                    transaction.replace(R.id.mainContent, targetFragment);
+               transaction.commit();
 
 
 
