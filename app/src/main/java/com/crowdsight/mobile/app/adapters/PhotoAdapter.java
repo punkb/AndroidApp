@@ -24,7 +24,7 @@ public class PhotoAdapter extends ArrayAdapter<PhotoItem> {
     private int resourceId;
 
     public PhotoAdapter(Context context, int resourceId,
-                        ArrayList<PhotoItem> items, boolean useList) {
+                        List<PhotoItem> items, boolean useList) {
         super(context, resourceId, items);
         this.context = context;
         this.resourceId = resourceId;

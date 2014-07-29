@@ -38,10 +38,7 @@ import com.facebook.UiLifecycleHelper;
 public class MainActivity extends ActionBarActivity
         implements
         Venues.OnFragmentInteractionListener,
-        photoofday.OnFragmentInteractionListener,
-        BaseFragment.OnFragmentInteractionListener,
-        PhotoGalleryFragment.OnFragmentInteractionListener
-{
+        photoofday.OnFragmentInteractionListener,BaseFragment.OnFragmentInteractionListener{
 
     public static final int SELECT_PHOTO_ACTION = 0;
 
@@ -52,8 +49,8 @@ public class MainActivity extends ActionBarActivity
 
     private static final int VENUES = 3;
     private static final int PHOTOOFDAY = 4;
-    //private static final int PHOTOGALLERY = 5;
-
+//    private static final int PHOTOGALLERY = 5;
+//
 
 
 
@@ -114,13 +111,15 @@ public class MainActivity extends ActionBarActivity
         fragments[VENUES] = VenuesFragment;
 
 
-        photoofday PhotoOfDayFragment = new photoofday();
-        transaction.add(R.id.mainContent,PhotoOfDayFragment);
-        fragments[PHOTOOFDAY] = PhotoOfDayFragment;
+
 
 //        PhotoGalleryFragment photoGallery = new PhotoGalleryFragment();
 //        transaction.add(R.id.mainContent, photoGallery);
 //        fragments[PHOTOGALLERY]= photoGallery;
+
+        photoofday PhotoOfDayFragment = new photoofday();
+        transaction.add(R.id.mainContent,PhotoOfDayFragment);
+        fragments[PHOTOOFDAY] = PhotoOfDayFragment;
 
 
 
@@ -206,13 +205,14 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public void onFragmentInteraction(String id) {
-
+        
     }
 
     @Override
     public void onFragmentInteraction(int actionId) {
 
     }
+
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
@@ -226,7 +226,9 @@ public class MainActivity extends ActionBarActivity
 
     private void selectItem(int position) {
 
-
+        FragmentManager fm = getSupportFragmentManager();
+        android.support.v4.app.FragmentTransaction transaction = fm.beginTransaction();
+        BaseFragment targetFragment = null;
 
         switch (position) {
             case 0:
@@ -251,18 +253,17 @@ public class MainActivity extends ActionBarActivity
                 break;
             case 6:
                //showFragment(PHOTOGALLERY,false);
-                FragmentManager fm = getSupportFragmentManager();
-                android.support.v4.app.FragmentTransaction transaction = fm.beginTransaction();
-                BaseFragment targetFragment = null;
+
 
                 targetFragment = PhotoGalleryFragment.newInstance(6);
                     transaction.replace(R.id.mainContent, targetFragment);
-               transaction.commit();
+
 
 
 
                 break;
         }
+        transaction.commit();
 
         setTitle(navigationMenu[position]);
         drawer_Layout.closeDrawer(drawerListView);

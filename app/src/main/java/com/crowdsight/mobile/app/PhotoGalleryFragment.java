@@ -65,24 +65,7 @@ public class PhotoGalleryFragment extends BaseFragment implements AbsListView.On
         return fragment;
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
 
-        // Create an empty loader and pre-initialize the photo list items as an empty list.
-        Context context = getActivity().getBaseContext();
-
-        // Set up empty mAdapter
-        mPhotoListItem = new ArrayList<PhotoItem>() ;
-        mAdapter = new PhotoAdapter(context,
-                R.layout.photo_item,
-                mPhotoListItem, false);
-
-        // Prepare the loader.  Either re-connect with an existing one,
-        // or start a new one.
-        getLoaderManager().initLoader(0, null,this);
-
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -100,7 +83,7 @@ public class PhotoGalleryFragment extends BaseFragment implements AbsListView.On
         // Prepare the loader.  Either re-connect with an existing one,
         // or start a new one.
        getLoaderManager().initLoader(0, null, this);
-        //getSupportLoaderManager().initLoader(0, null, this);
+
     }
 
     @Override
@@ -120,6 +103,8 @@ public class PhotoGalleryFragment extends BaseFragment implements AbsListView.On
 
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);
+
+
 
         return view;
     }
@@ -239,6 +224,8 @@ public class PhotoGalleryFragment extends BaseFragment implements AbsListView.On
         mAdapter.notifyDataSetChanged();
         resolveEmptyText();
         cancelProgressDialog();
+
+
     }
 
     @Override
@@ -261,12 +248,6 @@ public class PhotoGalleryFragment extends BaseFragment implements AbsListView.On
         }
     }
 
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
-        public void onFragmentInteraction(String id);
-        public void onFragmentInteraction(int actionId);
-    }
 
 
 }

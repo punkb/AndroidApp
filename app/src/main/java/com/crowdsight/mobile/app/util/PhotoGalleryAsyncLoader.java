@@ -1,6 +1,6 @@
 package com.crowdsight.mobile.app.util;
 
-import android.annotation.TargetApi;
+
 import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.os.Build;
@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by pankaj on 23/07/14.
  */
-//@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+
 public class PhotoGalleryAsyncLoader extends android.support.v4.content.AsyncTaskLoader<List<PhotoItem>> {
 
     // Persistent list of photo list item
@@ -22,7 +22,7 @@ public class PhotoGalleryAsyncLoader extends android.support.v4.content.AsyncTas
      * Constructor
      * @param context
      */
-    //@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+
     public PhotoGalleryAsyncLoader(Context context) {
         super(context);
     }
@@ -97,7 +97,7 @@ public class PhotoGalleryAsyncLoader extends android.support.v4.content.AsyncTas
     /**
      * Handles a request to stop the Loader.
      */
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+
     @Override protected void onStopLoading() {
         // Attempt to cancel the current load task if possible.
         cancelLoad();
