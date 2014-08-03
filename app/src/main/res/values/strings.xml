@@ -24,6 +24,8 @@
     <string name="title_activity_SplashFragment">SplashFragment</string>
     <string name="title_activity_SelectionFragment">SelectionFragment</string>
     <string name="settings">Settings</string>
+    <string name="album_name">Crowdsight</string>
+    <string name="twitter_callback">oauth://twit2android</string>
 
     <string-array name="home_menu">
         <item>Track Location</item>
@@ -43,6 +45,8 @@
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string name="title_activity_camera">Camera</string>
+    <string name="title_activity_twitter_login">Twitter</string>
 
 
 </resources>

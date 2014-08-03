@@ -58,6 +58,24 @@
             android:name="com.facebook.LoginActivity"
             android:label="@string/title_ActivityLogin" >
         </activity>
+        <activity
+            android:name=".CameraActivity"
+            android:label="@string/title_activity_camera" >
+        </activity>
+        <activity
+            android:name=".TwitterLoginActivity"
+            android:label="@string/title_activity_twitter_login" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="twit2android"
+                    android:scheme="oauth" />
+            </intent-filter>
+        </activity>
 
     </application>
 

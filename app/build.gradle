@@ -15,9 +15,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+    }
     productFlavors {
     }
 }
+
+dependencies {
+    compile files('libs/twitter4j-core-4.0.2.jar')
+    compile files('libs/twitter4j-stream-4.0.2.jar')
+    compile files('libs/twitter4j-media-support-4.0.2.jar')
+}
+
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])

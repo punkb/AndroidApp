@@ -19,7 +19,6 @@ import android.widget.Toast;
 
 import java.io.File;
 
-import twitter4j.Status;
 import twitter4j.StatusUpdate;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -64,6 +63,9 @@ public class TwitterLoginActivity extends Activity {
     private TextView messageView;
     private EditText messageBox;
 
+    //implement full screen image view
+    private static final int IMAGEVIEW = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +81,8 @@ public class TwitterLoginActivity extends Activity {
         logoutTwitter = (Button) findViewById(R.id.buttonTwitterLogout);
         imageUpload = (Button) findViewById(R.id.photoUpload);
         messageView = (TextView) findViewById(R.id.message);
-        uploadStatus = (Button) findViewById(R.id.statusUpload);
+        // uploadStatus = (Button) findViewById(R.id.statusUpload);
+        messageBox = (EditText) findViewById(R.id.updateMsg);
 
         loginTwitter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,12 +114,19 @@ public class TwitterLoginActivity extends Activity {
             }
         });
         
-        uploadStatus.setOnClickListener(new View.OnClickListener() {
+    /*    uploadStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
              //   uploadStatus("This is a random tweet test from android app.");
+                String msg = messageBox.getText().toString();
+                if(msg == null){
+                    Toast.makeText(getApplicationContext(),"Please input your message before uploading.", Toast.LENGTH_SHORT).show();
+                }else {
+                    uploadStatus(msg);
+                }
+
             }
-        });
+        });*/
 
         //Handling the call back
         Uri uri = getIntent().getData();
@@ -138,12 +148,11 @@ public class TwitterLoginActivity extends Activity {
     private void uploadStatus(String tweet) {
         try
         {
-            Status status = twitter.updateStatus(tweet);
-            //System.out.println("Status updated to [" + status.getText() + "].");
-        }
-        catch (TwitterException te)
-        {
-            System.out.println("Error: "+ te.getMessage());
+            StatusUpdate statusMsg = new StatusUpdate(tweet);
+            twitter.updateStatus(statusMsg);
+            Toast.makeText(getApplicationContext(),"You just uploaded a tweet.", Toast.LENGTH_SHORT).show();
+        } catch (TwitterException e) {
+            Log.d("TAG", "Pic Upload error" + e.getErrorMessage());
         }
 
     }
@@ -158,11 +167,11 @@ public class TwitterLoginActivity extends Activity {
 
             ConfigurationBuilder confbuilder = new ConfigurationBuilder();
             Configuration conf = confbuilder
-                  .setOAuthConsumerKey(CONSUMER_KEY)
-                  .setOAuthConsumerSecret(CONSUMER_SECRET)
-                  .setOAuthAccessToken(oauthAccessToken)
-                  .setOAuthAccessTokenSecret(oAuthAccessTokenSecret)
-                  .build();
+                    .setOAuthConsumerKey(CONSUMER_KEY)
+                    .setOAuthConsumerSecret(CONSUMER_SECRET)
+                    .setOAuthAccessToken(oauthAccessToken)
+                    .setOAuthAccessTokenSecret(oAuthAccessTokenSecret)
+                    .build();
             twitterStream = new TwitterStreamFactory(conf).getInstance();
 
         } else {
@@ -194,8 +203,8 @@ public class TwitterLoginActivity extends Activity {
         ConfigurationBuilder cb = new ConfigurationBuilder();
         cb.setOAuthConsumerKey(CONSUMER_KEY);
         cb.setOAuthConsumerSecret(CONSUMER_SECRET);
-      //  cb.setOAuthAccessToken(ACCESS_TOKEN);
-      //  cb.setOAuthAccessTokenSecret(ACCESS_TOKEN_SECRET);
+        //  cb.setOAuthAccessToken(ACCESS_TOKEN);
+        //  cb.setOAuthAccessTokenSecret(ACCESS_TOKEN_SECRET);
 
         TwitterFactory tf = new TwitterFactory(cb.build());
         twitter = tf.getInstance();
@@ -203,9 +212,9 @@ public class TwitterLoginActivity extends Activity {
 
         String callbackURL = getResources().getString(R.string.twitter_callback);
         try{
-                requestToken = twitter.getOAuthRequestToken(callbackURL);
+            requestToken = twitter.getOAuthRequestToken(callbackURL);
         }catch (TwitterException e){
-             e.printStackTrace();
+            e.printStackTrace();
         }
 
         //requestToken = twitter.getOAuthRequestToken(CALLBACK_URL);
@@ -220,31 +229,33 @@ public class TwitterLoginActivity extends Activity {
     {
         super.onActivityResult(requestCode, resultCode, data);
 
-            if(requestCode == GALLERY_CODE){
-                if(resultCode == RESULT_OK && null != data){
-                    Uri selectedImage = data.getData();
-                    String[] filePathColumn = { MediaStore.Images.Media.DATA };
-                    Cursor cursor = getContentResolver().query(selectedImage,
-                            filePathColumn, null, null, null);
-                    cursor.moveToFirst();
+        if(requestCode == GALLERY_CODE){
+            if(resultCode == RESULT_OK && null != data){
+                Uri selectedImage = data.getData();
+                String[] filePathColumn = { MediaStore.Images.Media.DATA };
+                Cursor cursor = getContentResolver().query(selectedImage,
+                        filePathColumn, null, null, null);
+                cursor.moveToFirst();
 
-                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                    String picturePath = cursor.getString(columnIndex);
-                    cursor.close();
+                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                String picturePath = cursor.getString(columnIndex);
+                cursor.close();
 
-                    //Toast.makeText(getApplicationContext(), "This is the path of the picture : "+picturePath, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "This is the path of the picture : "+picturePath, Toast.LENGTH_SHORT).show();
 
-                    uploadImage(new File(picturePath)); //compare the dates and display the image
-                }
+                uploadImage(new File(picturePath)); //compare the dates and display the image
             }
+        }
     }
 
     public void uploadImage(File file){
 
+        //String statusMessage = messageBox.getText().toString();
+
         if(file.exists()){
             try {
-                StatusUpdate status = new StatusUpdate("This is my test status upload");
-               status.setMedia(file);
+                StatusUpdate status = new StatusUpdate("Test photo upload.");
+                status.setMedia(file);
                 twitter.updateStatus(status);
             } catch (TwitterException e) {
                 Log.d("TAG", "Pic Upload error" + e.getErrorMessage());
@@ -296,5 +307,5 @@ public class TwitterLoginActivity extends Activity {
         editor.remove(PREF_KEY_SECRET);
 
         editor.commit();
-        }
+    }
 }
