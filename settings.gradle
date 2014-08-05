@@ -1,1 +1,2 @@
-include ':app', 'libraries:facebook'
+include ':app', 'libraries:facebook', ':androidStaggeredGridView'
+project(':androidStaggeredGridView').projectDir = new File('libraries/androidStaggeredGridView')
