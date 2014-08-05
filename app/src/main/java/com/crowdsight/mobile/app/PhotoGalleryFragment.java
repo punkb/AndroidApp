@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.crowdsight.mobile.app.adapters.PhotoAdapter;
 import com.crowdsight.mobile.app.adapters.items.PhotoItem;
 import com.crowdsight.mobile.app.util.PhotoGalleryAsyncLoader;
+import com.etsy.android.grid.StaggeredGridView;
 
 
 import java.util.ArrayList;
@@ -38,11 +39,12 @@ public class PhotoGalleryFragment extends BaseFragment implements AbsListView.On
 
     // Ivars.
     protected OnFragmentInteractionListener mListener;
-    protected AbsListView mListView;
+   // protected AbsListView mListView;
     protected PhotoAdapter mAdapter;
     protected ArrayList<PhotoItem> mPhotoListItem;
     protected TextView mEmptyTextView;
     protected ProgressDialog mLoadingProgressDialog;
+    protected StaggeredGridView mListView;
 
 
     /**
@@ -94,7 +96,7 @@ public class PhotoGalleryFragment extends BaseFragment implements AbsListView.On
         view = inflater.inflate(R.layout.fragment_photo_gallery, container, false);
 
         // Set the mAdapter
-        mListView = (AbsListView) view.findViewById(android.R.id.list);
+        mListView = (StaggeredGridView) view.findViewById(android.R.id.list);
         ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
         mEmptyTextView = (TextView)view.findViewById(R.id.empty);
 
