@@ -49,12 +49,14 @@ public class MainActivity extends ActionBarActivity
 
     private static final int VENUES = 3;
     private static final int PHOTOOFDAY = 4;
-//    private static final int PHOTOGALLERY = 5;
+    private static final int PHOTOGALLERY = 5;
+
+
 //
 
 
 
-    private static final int FRAGMENT_COUNT = PHOTOOFDAY + 1;
+    private static final int FRAGMENT_COUNT = PHOTOGALLERY + 1;
 
 
     private Fragment[] fragments = new Fragment[FRAGMENT_COUNT];
@@ -113,9 +115,9 @@ public class MainActivity extends ActionBarActivity
 
 
 
-//        PhotoGalleryFragment photoGallery = new PhotoGalleryFragment();
-//        transaction.add(R.id.mainContent, photoGallery);
-//        fragments[PHOTOGALLERY]= photoGallery;
+        PhotoGalleryFragment photoGallery = new PhotoGalleryFragment();
+        transaction.add(R.id.mainContent, photoGallery);
+        fragments[PHOTOGALLERY]= photoGallery;
 
         photoofday PhotoOfDayFragment = new photoofday();
         transaction.add(R.id.mainContent,PhotoOfDayFragment);
@@ -252,11 +254,14 @@ public class MainActivity extends ActionBarActivity
                 showFragment(SPLASH, false);
                 break;
             case 6:
-               //showFragment(PHOTOGALLERY,false);
 
 
-                targetFragment = PhotoGalleryFragment.newInstance(6);
-                    transaction.replace(R.id.mainContent, targetFragment);
+
+//                targetFragment = PhotoGalleryFragment.newInstance(6);
+//                    transaction.add(R.id.mainContent, targetFragment);
+//                transaction.hide(fragments[6]);
+                showFragment(PHOTOGALLERY,false);
+
 
 
 
